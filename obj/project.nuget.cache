@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "AB4EQb8nuBc=",
+  "dgSpecHash": "DSG1M1/HTqc=",
   "success": true,
   "projectFilePath": "C:\\Users\\NadhivaAzwar\\PeminjamanTempat\\2026-PeminjamanTempat-backend\\2026-PeminjamanTempat-backend.csproj",
   "expectedPackageFiles": [
@@ -36,6 +36,7 @@
     "C:\\Users\\NadhivaAzwar\\.nuget\\packages\\swashbuckle.aspnetcore.swaggergen\\10.1.2\\swashbuckle.aspnetcore.swaggergen.10.1.2.nupkg.sha512",
     "C:\\Users\\NadhivaAzwar\\.nuget\\packages\\swashbuckle.aspnetcore.swaggerui\\10.1.2\\swashbuckle.aspnetcore.swaggerui.10.1.2.nupkg.sha512",
     "C:\\Users\\NadhivaAzwar\\.nuget\\packages\\system.codedom\\6.0.0\\system.codedom.6.0.0.nupkg.sha512",
+    "C:\\Users\\NadhivaAzwar\\.nuget\\packages\\system.componentmodel.annotations\\5.0.0\\system.componentmodel.annotations.5.0.0.nupkg.sha512",
     "C:\\Users\\NadhivaAzwar\\.nuget\\packages\\system.composition\\9.0.0\\system.composition.9.0.0.nupkg.sha512",
     "C:\\Users\\NadhivaAzwar\\.nuget\\packages\\system.composition.attributedmodel\\9.0.0\\system.composition.attributedmodel.9.0.0.nupkg.sha512",
     "C:\\Users\\NadhivaAzwar\\.nuget\\packages\\system.composition.convention\\9.0.0\\system.composition.convention.9.0.0.nupkg.sha512",

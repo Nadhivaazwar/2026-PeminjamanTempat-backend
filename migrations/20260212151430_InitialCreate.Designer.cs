@@ -11,7 +11,7 @@ using PeminjamanTempatBackend.Data;
 namespace _2026_PeminjamanTempat_backend.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20260212112557_InitialCreate")]
+    [Migration("20260212151430_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -19,6 +19,35 @@ namespace _2026_PeminjamanTempat_backend.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "10.0.3");
+
+            modelBuilder.Entity("PeminjamanTempatBackend.Entities.Peminjaman", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTime>("EndTime")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("StartTime")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("TempatId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("TempatId");
+
+                    b.ToTable("Peminjaman");
+                });
 
             modelBuilder.Entity("PeminjamanTempatBackend.Entities.Tempat", b =>
                 {
@@ -50,6 +79,17 @@ namespace _2026_PeminjamanTempat_backend.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Tempat");
+                });
+
+            modelBuilder.Entity("PeminjamanTempatBackend.Entities.Peminjaman", b =>
+                {
+                    b.HasOne("PeminjamanTempatBackend.Entities.Tempat", "Tempat")
+                        .WithMany()
+                        .HasForeignKey("TempatId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Tempat");
                 });
 #pragma warning restore 612, 618
         }

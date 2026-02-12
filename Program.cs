@@ -4,43 +4,30 @@ using PeminjamanTempatBackend.Entities;  // Pastikan nama entitas Tempat ada di 
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+// Tambahkan DbContext SQLite
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));  // Gunakan SQLite
+    options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-builder.Services.AddControllers();  // Menambahkan controllers
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();  // Menambahkan Swagger untuk dokumentasi API
-
-// Menambahkan OpenAPI (Swagger)
-builder.Services.AddOpenApi();  // Untuk OpenAPI (Swagger)
-
-// Menambahkan CORS
-builder.Services.AddCors(options =>
-{
-    options.AddPolicy("AllowAllOrigins", policy =>
-    {
-        policy.AllowAnyOrigin()
-              .AllowAnyMethod()
-              .AllowAnyHeader();
+// Tambahkan CORS agar bisa diakses Frontend React
+builder.Services.AddCors(options => {
+    options.AddPolicy("AllowReact", policy => {
+        policy.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
     });
 });
 
+builder.Services.AddControllers();
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
+
 var app = builder.Build();
 
-// Menggunakan CORS
-app.UseCors("AllowAllOrigins");
-
-// Mengaktifkan Swagger UI di development
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
-    app.UseSwaggerUI();  // Menampilkan UI Swagger
+    app.UseSwaggerUI();
 }
 
-app.UseHttpsRedirection();  // Mengaktifkan HTTPS Redirection
-
-app.MapControllers();  // Memetakan controller ke rute yang benar
-
-// Jalankan aplikasi
+app.UseCors("AllowReact"); // Gunakan CORS
+app.UseAuthorization();
+app.MapControllers();
 app.Run();

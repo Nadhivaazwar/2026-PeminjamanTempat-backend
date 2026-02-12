@@ -5,11 +5,9 @@ namespace PeminjamanTempatBackend.Data
 {
     public class ApplicationDbContext : DbContext
     {
-        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
-            : base(options)
-        {
-        }
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
 
-        public DbSet<Tempat> Tempat { get; set; }  // Pastikan entitas 'Tempat' sudah ada
+        public DbSet<Tempat> Tempat { get; set; }
+        public DbSet<Peminjaman> Peminjaman { get; set; }
     }
 }

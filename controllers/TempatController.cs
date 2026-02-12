@@ -1,74 +1,65 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using PeminjamanTempatBackend.Data;
-using PeminjamanTempatBackend.Entities;  // Pastikan nama entitas Tempat ada di Entities
-using PeminjamanTempatBackend.DTOs.Tempat;  // Pastikan sudah ada DTO untuk Tempat
+using PeminjamanTempatBackend.Entities;
+using PeminjamanTempatBackend.DTOs.Tempat;
 
 namespace PeminjamanTempatBackend.Controllers
 {
+    [Route("api/[controller]")]
     [ApiController]
-    [Route("api/[controller]")]  // Route untuk controller
     public class TempatController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
 
-        // Constructor
         public TempatController(ApplicationDbContext context)
         {
             _context = context;
         }
 
-        // GET: api/tempat
+        // Ambil semua tempat yang belum di-soft delete
         [HttpGet]
-        public async Task<IActionResult> GetAll()
+        public async Task<ActionResult<IEnumerable<TempatResponseDto>>> GetTempat()
         {
-            var tempat = await _context.Tempat.ToListAsync(); // Ambil semua data Tempat
-            return Ok(tempat);
+            return await _context.Tempat
+                .Where(t => t.DeletedAt == null)
+                .Select(t => new TempatResponseDto
+                {
+                    Id = t.Id,
+                    Name = t.Name,
+                    Location = t.Location,
+                    Capacity = t.Capacity,
+                    Status = t.Status,
+                    Description = t.Description
+                }).ToListAsync();
         }
 
-        // GET: api/tempat/5
-        [HttpGet("{id}")]
-        public async Task<IActionResult> GetById(int id)
-        {
-            var tempat = await _context.Tempat.FindAsync(id);
-            if (tempat == null)
-                return NotFound();
-
-            return Ok(tempat);
-        }
-
-        // POST: api/tempat
+        // Tambah Tempat Baru
         [HttpPost]
-        public async Task<IActionResult> Create([FromBody] TempatCreateDto dto)  // DTO untuk inputan data
+        public async Task<ActionResult<Tempat>> CreateTempat(TempatCreateDto dto)
         {
-            if (!ModelState.IsValid)
-                return BadRequest(ModelState);
-
             var tempat = new Tempat
             {
                 Name = dto.Name,
                 Location = dto.Location,
                 Capacity = dto.Capacity,
-                Status = dto.Status,
+                Status = dto.Status ?? "Tersedia",
                 Description = dto.Description
             };
 
             _context.Tempat.Add(tempat);
             await _context.SaveChangesAsync();
-
-            return CreatedAtAction(nameof(GetById), new { id = tempat.Id }, tempat);
+            return Ok(tempat);
         }
 
-        // PUT: api/tempat/5
+        // Update Data Tempat
         [HttpPut("{id}")]
-        public async Task<IActionResult> Update(int id, [FromBody] TempatUpdateDto dto)
+        public async Task<IActionResult> UpdateTempat(int id, TempatUpdateDto dto)
         {
-            if (id != dto.Id)
-                return BadRequest();
+            if (id != dto.Id) return BadRequest();
 
             var tempat = await _context.Tempat.FindAsync(id);
-            if (tempat == null)
-                return NotFound();
+            if (tempat == null) return NotFound();
 
             tempat.Name = dto.Name;
             tempat.Location = dto.Location;
@@ -76,25 +67,19 @@ namespace PeminjamanTempatBackend.Controllers
             tempat.Status = dto.Status;
             tempat.Description = dto.Description;
 
-            _context.Entry(tempat).State = EntityState.Modified;
             await _context.SaveChangesAsync();
-
             return NoContent();
         }
 
-        // DELETE: api/tempat/5
+        // Soft Delete (Hanya mengisi tanggal DeletedAt)
         [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete(int id)
+        public async Task<IActionResult> DeleteTempat(int id)
         {
             var tempat = await _context.Tempat.FindAsync(id);
-            if (tempat == null)
-                return NotFound();
+            if (tempat == null) return NotFound();
 
-            // Soft delete logic
-            tempat.DeletedAt = DateTime.UtcNow;  // Soft delete
-            _context.Entry(tempat).State = EntityState.Modified;
+            tempat.DeletedAt = DateTime.Now;
             await _context.SaveChangesAsync();
-
             return NoContent();
         }
     }
