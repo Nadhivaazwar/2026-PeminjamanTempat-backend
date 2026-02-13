@@ -71,14 +71,15 @@ namespace PeminjamanTempatBackend.Controllers
             return NoContent();
         }
 
-        // Soft Delete (Hanya mengisi tanggal DeletedAt)
+
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteTempat(int id)
         {
             var tempat = await _context.Tempat.FindAsync(id);
             if (tempat == null) return NotFound();
+            
+            _context.Tempat.Remove(tempat);
 
-            tempat.DeletedAt = DateTime.Now;
             await _context.SaveChangesAsync();
             return NoContent();
         }
