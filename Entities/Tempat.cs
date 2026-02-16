@@ -1,6 +1,6 @@
 using System;
 using System.ComponentModel.DataAnnotations;
-namespace PeminjamanTempatBackend.Entities
+namespace _2026_PeminjamanTempat_backend.Entities
 {
     public class Tempat
     {

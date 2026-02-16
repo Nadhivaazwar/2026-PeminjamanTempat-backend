@@ -1,4 +1,4 @@
-namespace PeminjamanTempatBackend.DTOs.Tempat
+namespace _2026_PeminjamanTempat_backend.DTOs.Tempat
 {
     public class TempatCreateDto
     {

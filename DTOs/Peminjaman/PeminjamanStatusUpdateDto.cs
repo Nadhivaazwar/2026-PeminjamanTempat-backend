@@ -1,10 +1,5 @@
-using System.ComponentModel.DataAnnotations;
-
-namespace PeminjamanTempatBackend.DTOs.Peminjaman
-{
-    public class PeminjamanStatusUpdateDto
-    {
-        [Required]
-        public string Status { get; set; }
+namespace _2026_PeminjamanTempat_backend.DTOs.Peminjaman {
+    public class PeminjamanStatusUpdateDto {
+        public string Status { get; set; } = string.Empty;
     }
 }

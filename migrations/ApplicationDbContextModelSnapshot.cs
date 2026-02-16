@@ -3,7 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using PeminjamanTempatBackend.Data;
+using _2026_PeminjamanTempat_backend.Data;
 
 #nullable disable
 
@@ -15,15 +15,19 @@ namespace _2026_PeminjamanTempat_backend.Migrations
         protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
-            modelBuilder.HasAnnotation("ProductVersion", "10.0.3");
+            modelBuilder.HasAnnotation("ProductVersion", "10.0.0");
 
-            modelBuilder.Entity("PeminjamanTempatBackend.Entities.Peminjaman", b =>
+            modelBuilder.Entity("_2026_PeminjamanTempat_backend.Entities.Peminjaman", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
                     b.Property<DateTime>("EndTime")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("NamaPeminjam")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<DateTime>("StartTime")
@@ -36,9 +40,6 @@ namespace _2026_PeminjamanTempat_backend.Migrations
                     b.Property<int>("TempatId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("UserId")
-                        .HasColumnType("INTEGER");
-
                     b.HasKey("Id");
 
                     b.HasIndex("TempatId");
@@ -46,7 +47,7 @@ namespace _2026_PeminjamanTempat_backend.Migrations
                     b.ToTable("Peminjaman");
                 });
 
-            modelBuilder.Entity("PeminjamanTempatBackend.Entities.Tempat", b =>
+            modelBuilder.Entity("_2026_PeminjamanTempat_backend.Entities.Tempat", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -78,9 +79,9 @@ namespace _2026_PeminjamanTempat_backend.Migrations
                     b.ToTable("Tempat");
                 });
 
-            modelBuilder.Entity("PeminjamanTempatBackend.Entities.Peminjaman", b =>
+            modelBuilder.Entity("_2026_PeminjamanTempat_backend.Entities.Peminjaman", b =>
                 {
-                    b.HasOne("PeminjamanTempatBackend.Entities.Tempat", "Tempat")
+                    b.HasOne("_2026_PeminjamanTempat_backend.Entities.Tempat", "Tempat")
                         .WithMany()
                         .HasForeignKey("TempatId")
                         .OnDelete(DeleteBehavior.Cascade)

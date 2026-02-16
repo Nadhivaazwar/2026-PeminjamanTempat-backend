@@ -1,7 +1,8 @@
 using Microsoft.EntityFrameworkCore;
-using PeminjamanTempatBackend.Entities;
+// Sesuaikan dengan namespace yang ada di file Peminjaman.cs dan Tempat.cs
+using _2026_PeminjamanTempat_backend.Entities;
 
-namespace PeminjamanTempatBackend.Data
+namespace _2026_PeminjamanTempat_backend.Data
 {
     public class ApplicationDbContext : DbContext
     {
