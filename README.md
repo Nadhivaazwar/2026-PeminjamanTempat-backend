@@ -1,65 +1,41 @@
-# 2026-PeminjamanTempat-backend
-# Peminjaman Tempat
+# Sistem Peminjaman Tempat 2026
 
-## Deskripsi
-Peminjaman Tempat adalah aplikasi untuk mengelola peminjaman ruangan di suatu tempat. Aplikasi ini memungkinkan administrator untuk melihat dan mengubah status peminjaman ruangan, mulai dari status "Menunggu Persetujuan", "Disetujui", hingga "Ditolak". Tujuan utama aplikasi ini adalah untuk mempermudah manajemen ruangan dan memastikan semua peminjaman tercatat dengan baik dan akurat.
+Aplikasi manajemen peminjaman ruangan terintegrasi yang dibangun untuk memenuhi tugas pengembangan perangkat lunak v1.0.0.
 
-## Fitur
-- Menampilkan daftar peminjaman ruangan.
-- Mengubah status peminjaman antara "Menunggu Persetujuan", "Disetujui", dan "Ditolak".
-- Menghubungkan data peminjaman dengan tempat yang tersedia.
-- Real-time status pembaruan antara frontend dan backend.
-- API untuk memperbarui status peminjaman.
+## 🛠 Teknologi yang Digunakan
 
-## Tech Stack
-- **Frontend**: React, Axios, JavaScript, HTML, CSS
-- **Backend**: ASP.NET Core, C#
-- **Database**: SQL Server
-- **Others**: Swagger untuk dokumentasi API, Entity Framework untuk ORM.
+### **Backend**
+* **Framework**: .NET 10.0 (ASP.NET Core Web API)
+* **Runtime Version**: 10.0.102
+* **ORM**: Entity Framework Core 10.0.0
+* **Database**: SQLite
+* **API Documentation**: Swagger / Swashbuckle 10.1.3 & Scalar
 
-## Instalasi
+### **Frontend**
+* **Library Utama**: React v19.2.4
+* **Routing**: React Router Dom v6.30.3
+* **Styling**: Bootstrap v5.3.8 & React Icons
+* **Build Tool**: React Scripts v5.0.1
 
-### Backend (PeminjamanTempatBackend)
-1. Clone repositori:
-    ```bash
-    git clone https://github.com/username/2026-PeminjamanTempat-backend.git
-    ```
-2. Masuk ke direktori project:
-    ```bash
-    cd 2026-PeminjamanTempat-backend
-    ```
-3. Pastikan kamu sudah menginstal **.NET Core SDK**. Jika belum, instal di [sini](https://dotnet.microsoft.com/download).
-4. Restore dependensi:
-    ```bash
-    dotnet restore
-    ```
-5. Jalankan aplikasi:
-    ```bash
-    dotnet run
-    ```
-    Aplikasi backend akan berjalan di `http://localhost:5000`.
+## 🚀 Fitur Utama
+* **Manajemen Ruangan**: CRUD lengkap (Create, Read, Update, Delete) data tempat/ruangan.
+* **Manajemen Peminjaman**: Pengajuan jadwal peminjaman tempat secara real-time.
+* **Verifikasi Status**: Sistem persetujuan peminjaman (Pending, Disetujui, Ditolak).
+* **Riwayat Akses**: Pencatatan log akses penggunaan ruangan.
 
-### Frontend (PeminjamanTempatFrontend)
-1. Clone repositori:
-    ```bash
-    git clone https://github.com/username/2026-PeminjamanTempat-frontend.git
-    ```
-2. Masuk ke direktori project:
-    ```bash
-    cd 2026-PeminjamanTempat-frontend
-    ```
-3. Instal dependensi:
-    ```bash
-    npm install
-    ```
-4. Jalankan aplikasi:
-    ```bash
-    npm start
-    ```
-    Aplikasi frontend akan berjalan di `http://localhost:3000`.
+## 📋 Cara Menjalankan Proyek
 
-## Penggunaan
-Setelah aplikasi berjalan, kamu dapat mengakses frontend di `http://localhost:3000`. Di sana, kamu dapat melihat daftar peminjaman ruangan dan mengubah statusnya. Setiap perubahan status akan terhubung dengan backend dan memperbarui database secara otomatis.
+### **Prasyarat**
+* .NET 10 SDK installed
+* Node.js & npm installed
 
-### API untuk Mengupdate Status
-Untuk mengupdate status peminjaman, frontend akan mengirimkan permintaan PUT ke API backend:
+### **Langkah Instalasi**
+
+1. **Persiapan Database (Backend)**:
+   ```bash
+   cd 2026-PeminjamanTempat-backend
+   dotnet restore
+   dotnet ef database update
+   dotnet run
+
+2. **Persiapan**
